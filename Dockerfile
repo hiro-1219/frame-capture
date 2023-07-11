@@ -4,20 +4,6 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
 
 WORKDIR /app
 
-#ENV LIB="libswscale-dev \
-#  libtbb2 \
-#  libtbb-dev \
-#  libjpeg-dev \
-#  libpng-dev \
-#  libtiff-dev \
-#  libglib2.0-0 \
-#  libsm6 \
-#  libxext6 \
-#  libavformat-dev \
-#  libpq-dev"
-#RUN apt install -y libgl1-mesa-dev
-#RUN apt install -y libopencv-dev
-
 RUN apt update \
   && apt -y upgrade \
   && apt install --no-install-recommends -qy libswscale-dev \
