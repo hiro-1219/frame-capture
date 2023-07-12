@@ -1,2 +1,4 @@
 data/
 capture/
+__pycache__/
+.vscode/
