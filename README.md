@@ -1,10 +1,11 @@
-# Framce-Capture
+# Frame Capture
 動画から画像をキャプチャするアプリケーション
 
 ## Requirements
 python package
 - opencv-python
 - opencv-contrib-python
+- Pillow
 
 (Ubuntu22.04 apt package)
 - libgl1-mesa-dev libglib2.0-0
@@ -12,7 +13,7 @@ python package
 
 ## Usage
 ```
-$ python3 main.oy
+$ python3 main.py
 ```
 
 ## keybinding
