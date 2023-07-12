@@ -14,6 +14,7 @@ python package
 ```
 $ python3 main.oy
 ```
+
 ## keybinding
 - カーソルキー
     - 右 : フレームを1進める
