@@ -14,7 +14,6 @@ class CaptureVideo:
     def save_capture(self, save_frame_pos: int, save_ext: str) -> str:
         video_name = os.path.basename(self.video_path)
         video_name = os.path.splitext(video_name)[0] + "." + save_ext
-        print(video_name)
         save_path = os.path.join(self.save_base_path, video_name)
         os.makedirs(self.save_base_path, exist_ok=True)
         self.cv2_cap.set(cv2.CAP_PROP_POS_FRAMES, save_frame_pos)
@@ -30,6 +29,7 @@ class CaptureVideo:
         frame_size = self.get_frame_size()
         cap = self.cv2_cap
         self.all_frame = []
+        cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
         for _ in range(frame_size):
             ret, frame = cap.read()
             if ret:
