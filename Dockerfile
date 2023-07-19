@@ -27,5 +27,5 @@ RUN apt update \
 COPY . .
 RUN pip install -r requirements.txt
 
-CMD ["/app/main.py"]
+CMD ["/app/app.py"]
 ENTRYPOINT ["python3"]
