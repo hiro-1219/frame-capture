@@ -1,8 +1,9 @@
-from typing import Dict, Any
-from utils.capture import CaptureVideo, CaptureVideoLoader
+import re
 import tkinter as tk
 import cv2
 from PIL import Image, ImageTk
+
+from utils.capture import CaptureVideoLoader
 
 
 class Application(tk.Frame):
@@ -42,7 +43,11 @@ class Application(tk.Frame):
         self.__initialize(config)
     
     def __get_now_video_captures(self, now_video_counter: int):
-        return self.loader.load_capture_video(self.video_path_list[now_video_counter])
+        path = self.video_path_list[now_video_counter]
+        video_name = re.search(r'\/([^\/]+)$', path).group(1)
+
+        self.text.set(video_name)
+        return self.loader.load_capture_video(path)
     
     def __back_video_capture(self):
         self.text.set("")
