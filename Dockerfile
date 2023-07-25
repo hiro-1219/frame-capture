@@ -18,6 +18,7 @@ RUN apt update \
   libxext6 \
   libavformat-dev \
   libpq-dev \
+  libmagic1 \
   && apt-get clean \
   && apt-get autoclean \
   && apt-get autoremove \
