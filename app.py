@@ -46,8 +46,6 @@ class Application(tk.Frame):
     def __get_now_video_captures(self, now_video_counter: int):
         path = self.video_path_list[now_video_counter]
         video_name = re.search(r'\/([^\/]+)$', path).group(1)
-        print(now_video_counter)
-        #print("DEBUGGGGG")
 
         self.text.set(video_name)
         return self.loader.load_capture_video(path)
