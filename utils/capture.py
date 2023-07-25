@@ -1,5 +1,6 @@
 from typing import List, Dict, Any
 import magic
+from tqdm import tqdm
 import cv2
 import os
 
@@ -31,13 +32,16 @@ class CaptureVideo:
         cap = self.cv2_cap
         self.all_frame = []
         cap.set(cv2.CAP_PROP_POS_FRAMES, 0)
-        for _ in range(frame_size):
+        for _ in tqdm(range(frame_size)):
             ret, frame = cap.read()
             if ret:
                 self.all_frame.append(frame)
         
     def get_frame_size(self) -> int:
         return int(self.cv2_cap.get(cv2.CAP_PROP_FRAME_COUNT))
+    
+    def close_all_frame(self) -> None:
+        self.all_frame = []
 
 
 class CaptureVideoLoader:
@@ -67,8 +71,8 @@ class CaptureVideoLoader:
         path_list = [ os.path.join(base_path, path) for path in path_list ]
         video_path_list = []
         for path in path_list:
-            if f.from_file(path) == "video/mp4":
+            if f.from_file(path) in ["video/mp4", "video/x-msvideo"]:
                 video_path_list.append(path)
-        #print(video_path_list)
+        print(video_path_list)
         return video_path_list
 

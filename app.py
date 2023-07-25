@@ -46,13 +46,18 @@ class Application(tk.Frame):
     def __get_now_video_captures(self, now_video_counter: int):
         path = self.video_path_list[now_video_counter]
         video_name = re.search(r'\/([^\/]+)$', path).group(1)
+        print(now_video_counter)
         #print("DEBUGGGGG")
 
         self.text.set(video_name)
         return self.loader.load_capture_video(path)
     
+    def __close_now_video_frames(self):
+        self.now_video_capture.close_all_frame()
+    
     def __back_video_capture(self):
         self.text.set("")
+        self.__close_now_video_frames()
         if not (self.now_video_counter - 1 < 0):
             self.now_video_counter -= 1
         self.now_video_capture = self.__get_now_video_captures(self.now_video_counter)
@@ -61,6 +66,7 @@ class Application(tk.Frame):
 
     def __next_video_capture(self):
         self.text.set("")
+        self.__close_now_video_frames()
         if not (self.now_video_counter + 1 >= len(self.video_path_list)):
             self.now_video_counter += 1
         self.now_video_capture = self.__get_now_video_captures(self.now_video_counter)
