@@ -45,10 +45,10 @@ class CaptureVideo:
 
 
 class CaptureVideoLoader:
-    def __init__(self, video_base_path: str, save_base_path: str) -> None:
+    def __init__(self, video_base_path: str, save_base_path: str, video_type: List[str]) -> None:
         super(CaptureVideoLoader, self).__init__()
         self.save_base_path = save_base_path
-        self.video_path_list = self.__get_video_path_list(video_base_path)
+        self.video_path_list = self.__get_video_path_list(video_base_path, video_type)
         self.cap = self.__create_cap_list(self.video_path_list)
 
     def load_capture_video(self, video_path: str) -> CaptureVideo:
@@ -65,13 +65,13 @@ class CaptureVideoLoader:
             cap_dict[path] = CaptureVideo(path, self.save_base_path)
         return cap_dict
 
-    def __get_video_path_list(self, base_path: str) -> List[str]:
+    def __get_video_path_list(self, base_path: str, video_type: List[str]) -> List[str]:
         f = magic.Magic(mime=True, uncompress=True)
         path_list = os.listdir(base_path)
         path_list = [ os.path.join(base_path, path) for path in path_list ]
         video_path_list = []
         for path in path_list:
-            if f.from_file(path) in ["video/mp4", "video/x-msvideo"]:
+            if f.from_file(path) in video_type:
                 video_path_list.append(path)
         return video_path_list
 

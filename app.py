@@ -110,7 +110,7 @@ class Application(tk.Frame):
     
     def __initialize(self, config):
         self.now_video_counter = 0
-        self.loader = CaptureVideoLoader(config["data_base_path"], config["save_base_path"])
+        self.loader = CaptureVideoLoader(config["data_base_path"], config["save_base_path"], config["video_type"])
         self.video_path_list = self.loader.get_video_path_list()
         self.now_video_capture = self.__get_now_video_captures(self.now_video_counter)
         frame = self.now_video_capture.get_pos_frame(0)
@@ -122,7 +122,8 @@ if __name__ == "__main__":
         "title": "frame-capture",
         "ext": "png",
         "data_base_path": "./data/",
-        "save_base_path": "./capture/"
+        "save_base_path": "./capture/",
+        "video_type": ["video/mp4", "video/x-msvideo"]
     }
     root = tk.Tk()
     app = Application(config, master=root)
