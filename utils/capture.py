@@ -1,4 +1,5 @@
 from typing import List, Dict, Any
+import magic
 import cv2
 import os
 
@@ -61,7 +62,13 @@ class CaptureVideoLoader:
         return cap_dict
 
     def __get_video_path_list(self, base_path: str) -> List[str]:
-        video_path_list = os.listdir(base_path)
-        video_path_list = [ os.path.join(base_path, path) for path in video_path_list ]
-        return sorted(video_path_list)
+        f = magic.Magic(mime=True, uncompress=True)
+        path_list = os.listdir(base_path)
+        path_list = [ os.path.join(base_path, path) for path in path_list ]
+        video_path_list = []
+        for path in path_list:
+            if f.from_file(path) == "video/mp4":
+                video_path_list.append(path)
+        #print(video_path_list)
+        return video_path_list
 
