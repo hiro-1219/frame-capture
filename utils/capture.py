@@ -67,7 +67,7 @@ class CaptureVideoLoader:
         path_list = [ os.path.join(base_path, path) for path in path_list ]
         video_path_list = []
         for path in path_list:
-            if f.from_file(path) == "video/mp4":
+            if f.from_file(path) in ["video/mp4", "video/x-msvideo"]:
                 video_path_list.append(path)
         #print(video_path_list)
         return video_path_list
